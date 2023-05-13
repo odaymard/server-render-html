@@ -2,6 +2,7 @@ const express = require('express');
 const requestIp = require('request-ip');
 const app = express();
 const fs = require('fs');
+const { dirname } = require('path');
 
 // Middleware to get the client's IP address
 app.use(requestIp.mw());
@@ -19,7 +20,7 @@ app.get('/', (req, res) => {
       console.error('Error writing to reqlog.txt:', err);
     }
   });
-  res.send(`Your IP address is: ${clientIp}`);
+  res.sendFile(__dirname + '/index.html');
 });
 
 app.get('/getlogs', (req, res) => {
